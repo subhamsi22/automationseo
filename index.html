@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>banao automation</title>
+</head>
+<body>
+    <button id = "but">click me </button>
+<script>
+    const link = {
+        link1: `https://www.google.com/search?q=node+js+development+company+in+india&ie=UTF-8`,
+        link2:`https://banao.tech/services/nodejs-development`,
+        link3: `https://www.google.com/search?q=best+java+developemnt+company+in+usa&ie=UTF-8`,
+        link4: `https://banao.tech/services/android-app-development`,
+        link5: `https://www.google.com/search?q=best+react+developemtn+company+in+uar&ie=UTF-8`,
+        link6: `https://banao.tech/services/react-js-development`,
+        link7: `https://www.google.com/search?q=best+python+development+company+in+usa&ie=UTF-8`,
+        link8:`https://banao.tech/en-us/python-web-development-atlanta-usa`,
+        link9: `https://www.google.com/search?q=ai+interview&ie=UTF-8`,
+        link10: `https://www.interviewgod.ai/`,
+        link11: `https://www.google.com/search?q=ai+interview+company&ie=UTF-8`,
+        link12 : `https://interviewgod.ai/services/ai-interviewing`,
+        link13: `https://www.google.com/search?q=ai+itnervew+for+non+tech+role&ie=UTF-8`,
+        link14 : `https://www.interviewgod.ai/stories/logos_labs`,
+        link15: `https://www.google.com/search?q=ai+itenrview+for+it+role&ie=UTF-8`,
+        link16: `https://www.interviewgod.ai/feature/integrations`,
+
+    }
+
+    let a = Object.values(link);    
+    let i = 0;
+var but = document.getElementById("but");
+ let interval;
+
+but.addEventListener("click",()=>{
+interval = setInterval(() => {
+     if(i<a.length){
+            window.open(a[i], "_blank");
+            i++;    
+        }
+        else{
+            clearInterval(interval);
+        }
+}, 4000);
+   
+});
+</script>
+
+
+</body>
+</html>
