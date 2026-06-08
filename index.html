@@ -6,12 +6,51 @@
     <title>work auto</title>
 </head>
 <body>
-    <button id = "but">click me for seo  </button>
+    <button id = "but">click me for new seo  </button>
     <br>
-    <button id = "but1">click me for interview god seo </button>
-
+    <!-- <button id = "but1">click me for interview god seo </button> -->
 
 <script>
+const link  =  {
+    link1: 'https://www.google.com/search?q=banao+technologies',
+    link2:'https://banao.tech/',
+    link3 :'https://www.google.com/search?q=interview+god',
+    link4 :'https://www.interviewgod.ai/',
+     link5: 'https://www.google.com/search?q=banao+technologies',
+    link6:'https://banao.tech/',
+    link7:'https://www.google.com/search?q=vidya&sourceid=chrome',
+    link8:'https://vidya.online/',
+    link9:'https://www.google.com/search?q=vikaas',
+    link10:'AEBmAIJoAKPCcICChAAGEcY1gQYsAPCAg4QABjkAhjWBBiwA9gBAcICFxAuGNwGGLgGGNoGGNgCGMgDGLAD2AEBwgILEAAYgAQYigUYkQLCAgsQLhivARjHARiABMICBxAAGIAEGArCAgsQLhiABBjHARivAcICBxAAGIAEGA3CAg0QLhiABBgNGMcBGK8BwgIJEAAYgAQYDRgKwgIGEAAYHhgNwgIKEC4YAhjLARiABMICEBAuGBQYrwEYxwEYhwIYgATCAgoQLhiABBgCGMsBwgIZEC4YAhjLARiABBiXBRjcBBjeBBjfBNgBAZgDAIgGAZAGDboGBggBEAEYCZIHBTQuMi4zoAfpRLIHBTAuMi4zuAfRCMIHBzMtNy4xLjHIB6EBgAgB',
+    link11:'https://vikaas.ai/',
+    link12: 'https://www.google.com/search?q=Axon',
+    link13:'https://axonhq.ai/',
+}
+let valuea  = Object.values(link)
+let i =0;
+var but = document.getElementById("but");
+let interval;
+but.addEventListener("click",()=>{
+
+interval = setInterval(() => {
+     if(i<valuea.length){
+            window.open(valuea[i], "_blank");
+            i++;    
+        }
+        else{
+            clearInterval(interval);
+        }
+}, 12000);
+   
+    
+})
+
+   
+
+
+
+</script>
+<!-- <script>
     const link = {
         link1: `https://www.google.com/search?q=generative+ai+solutions+in+india&sxsrf=ANbL-n5c3Z55pThTNOWRudD2vpBLhxQ15A%3A1776826516226`,
         link2: `https://banao.tech/services/generative-ai`,
@@ -90,7 +129,7 @@ interval = setInterval(() => {
 
 
 
-</script>
+</script> -->
 
 
 </body>
