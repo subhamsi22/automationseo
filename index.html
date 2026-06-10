@@ -1,146 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>work auto</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEO Link Streamer Pro</title>
+  <meta name="description" content="Automate sequential link opening for SEO purposes. Open multiple URLs in separate tabs with custom delays and loops." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <button id = "but">click me for new seo  </button>
-    <br>
-    <!-- <button id = "but1">click me for interview god seo </button> -->
 
-<script>
-const originalLinks = {
-    link1: 'https://www.google.com/search?q=banao+technologies',
-    link2: 'https://banao.tech/',
-    link3: 'https://www.google.com/search?q=interview+god',
-    link4: 'https://www.interviewgod.ai/',
-    link5: 'https://www.google.com/search?q=banao+technologies',
-    link6: 'https://banao.tech/',
-    link7: 'https://www.google.com/search?q=vidya&sourceid=chrome',
-    link8: 'https://vidya.online/',
-    link9: 'https://www.google.com/search?q=vikaas',
-    link10: 'AEBmAIJoAKPCcICChAAGEcY1gQYsAPCAg4QABjkAhjWBBiwA9gBAcICFxAuGNwGGLgGGNoGGNgCGMgDGLAD2AEBwgILEAAYgAQYigUYkQLCAgsQLhivARjHARiABMICBxAAGIAEGArCAgsQLhiABBjHARivAcICBxAAGIAEGA3CAg0QLhiABBgNGMcBGK8BwgIJEAAYgAQYDRgKwgIGEAAYHhgNwgIKEC4YAhjLARiABMICEBAuGBQYrwEYxwEYhwIYgATCAgoQLhiABBgCGMsBwgIZEC4YAhjLARiABBiXBRjcBBjeBBjfBNgBAZgDAIgGAZAGDboGBggBEAEYCZIHBTQuMi4zoAfpRLIHBTAuMi4zuAfRCMIHBzMtNy4xLjHIB6EBgAgB',
-    link11: 'https://vikaas.ai/',
-    link12: 'https://www.google.com/search?q=axonhq.+ai',
-    link13: 'https://axonhq.ai/',
-};
+<div class="app-container">
 
-function repeatLinkObject(source, times) {
-    const repeated = {};
-    let index = 1;
-    Object.values(source).forEach(value => {
-        for (let count = 0; count < times; count += 1) {
-            repeated[`link${index}`] = value;
-            index += 1;
-        }
-    });
-    return repeated;
-}
+  <!-- ───── HEADER ───── -->
+  <header>
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+        </svg>
+      </div>
+      <h1>SEO Link Streamer Pro</h1>
+    </div>
+    <div class="status-badge-container">
+      <div id="status-badge" class="status-badge status-idle">
+        <span id="status-dot" class="status-dot"></span>
+        <span id="status-text">Idle</span>
+      </div>
+    </div>
+  </header>
 
-const link = repeatLinkObject(originalLinks, 4);
-const valuea = Object.values(link);
-let i = 0;
-const but = document.getElementById("but");
-let interval;
+  <!-- ───── POPUP WARNING BANNER ───── -->
+  <div class="glass-card">
+    <div class="alert-banner">
+      <div class="alert-header">
+        <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+        Allow Popups Before Starting
+      </div>
+      <div class="alert-body">
+        Browsers block tabs opened by scripts by default. Before clicking <strong>Start</strong>, you must allow popups:
+        <ol>
+          <li>Click <strong>Start</strong> — your browser may show a blocked popup icon in the address bar</li>
+          <li>Click the icon and select <strong>"Always allow popups from this site"</strong></li>
+          <li>Click <strong>Stop</strong>, then click <strong>Start</strong> again to run normally</li>
+        </ol>
+      </div>
+      <div class="alert-actions">
+        <button id="btn-test-popup" class="btn btn-secondary">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+          Test Popup
+        </button>
+      </div>
+    </div>
+  </div>
 
-but.addEventListener("click", () => {
-    if (interval) {
-        clearInterval(interval);
-    }
-    i = 0;
-    interval = setInterval(() => {
-        if (i < valuea.length) {
-            window.open(valuea[i], "_blank");
-            i += 1;
-        } else {
-            clearInterval(interval);
-        }
-    }, 3000);
-});
-</script>
-<!-- <script>
-    const link = {
-        link1: `https://www.google.com/search?q=generative+ai+solutions+in+india&sxsrf=ANbL-n5c3Z55pThTNOWRudD2vpBLhxQ15A%3A1776826516226`,
-        link2: `https://banao.tech/services/generative-ai`,
-        link3: `https://www.google.com/search?q=Generative+AI+Solutions+in+dubai&ie=UTF-8`,
-        link4: `https://banao.tech/ae/generative-ai-development-dubai-uae`,//
-        link5: `https://www.google.com/search?q=generative+ai+solutions+in++usa+&sxsrf=ANbL-n7eoNhTxVKIn572tOPjmbOmpukVkQ%3A1776826829592`,
-        link6: `https://banao.tech/en-us/generative-ai-development-new-york-usa`,//
-        link7: `https://www.google.com/search?q=Generative+AI+chatbot+development&ie=UTF-8`,
-        link8:`https://www.google.com/search?q=Generative+AI+chatbot+development&ie=UTF-8`,
+  <!-- ───── MAIN DASHBOARD GRID ───── -->
+  <div class="dashboard-grid">
 
-        link9: `https://www.google.com/search?q=generative+ai+chatbot+development+in+dubai&sxsrf=ANbL-n7VA4ATdE_ku4ul-5lZ2qUlyOXzgQ%3A1776827100605`,
-        link10: `https://banao.tech/services/ai-ml-development`,
-        link11: `https://www.google.com/search?q=generative+ai+chatbot+development+in+usa&sxsrf=ANbL-n42WxQQ_A9HnwCN_eIgY_QGgOxQUg%3A1776827164847`,
-        link12 : `https://www.google.com/search?q=progressive+web+app+development+company+india&sxsrf=ANbL-n4YmKezitMPBi1DtaD5OaFpa5Cmkw%3A1776827295746`,
-        link13: `https://banao.tech/services/pwa-development`,
-        link14 : `https://www.google.com/search?q=PWA+Development+Services+in+usa&sxsrf=ANbL-n6WxnzJtUh4ffC-TfJhqs0HEGYWdQ%3A1776827359355`,
-        link15: `https://www.banao.tech/`,
-        link16: `https://www.google.com/search?q=AI+Solutions+for+Transportation+%26+Automotive+Industry+in+dubai&ie=UTF-8`,
-        link17: `https://banao.tech/ae/ai-transportation-automotive-dubai-uae`,
-    }
+    <!-- LEFT: Controls Panel -->
+    <div class="glass-card">
+      <div class="panel-title">
+        <svg viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.92c.04-.34.07-.68.07-1.08 0-.4-.03-.74-.07-1.08l2.38-1.81c.21-.16.27-.45.14-.71l-2.26-3.8c-.13-.26-.42-.35-.68-.26l-2.82 1.1a8 8 0 0 0-1.87-1.07l-.43-2.97A.53.53 0 0 0 14 2h-4a.53.53 0 0 0-.53.45l-.43 2.97a7.87 7.87 0 0 0-1.87 1.07L4.35 5.4c-.26-.09-.55 0-.68.26L1.41 9.46c-.14.26-.07.55.14.71L3.93 12c-.04.34-.07.68-.07 1.08 0 .4.03.74.07 1.08L1.55 16c-.21.16-.27.45-.14.71l2.26 3.8c.13.26.42.35.68.26l2.82-1.1c.6.42 1.22.78 1.87 1.07l.43 2.97c.07.25.28.45.53.45h4c.25 0 .47-.2.53-.45l.43-2.97a7.87 7.87 0 0 0 1.87-1.07l2.82 1.1c.26.09.55 0 .68-.26l2.26-3.8c.13-.26.07-.55-.14-.71l-2.38-1.83z"/></svg>
+        Automation Settings
+      </div>
+      <div class="settings-group">
+        <div class="input-row">
+          <div>
+            <label for="loop-count">Loops (Repeats)</label>
+            <input type="number" id="loop-count" value="3" min="1" max="99" />
+          </div>
+          <div>
+            <label for="interval-delay">Delay (Seconds)</label>
+            <input type="number" id="interval-delay" value="7" min="1" max="120" step="0.5" />
+          </div>
+        </div>
 
-    let a = Object.values(link);    
-    let i = 0;
-var but = document.getElementById("but");
- let interval;
+        <div class="action-controls">
+          <div class="action-row-main">
+            <button id="btn-start" class="btn btn-primary">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              Start Automation
+            </button>
+          </div>
+          <div class="action-row-sub">
+            <button id="btn-pause" class="btn btn-warning" disabled>
+              <svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+              Pause
+            </button>
+            <button id="btn-stop" class="btn btn-danger" disabled>
+              <svg viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></svg>
+              Stop
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-but.addEventListener("click",()=>{
-interval = setInterval(() => {
-     if(i<a.length){
-            window.open(a[i], "_blank");
-            i++;    
-        }
-        else{
-            clearInterval(interval);
-        }
-}, 4000);
-   
-});
-// seo for interview god
+    <!-- RIGHT: Progress Panel -->
+    <div class="glass-card">
+      <div class="panel-title">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+        Progress & Stats
+      </div>
+      <div class="progress-panel">
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-label">Current Loop</div>
+            <div class="stat-value" id="stat-loop">0 / 3</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Current Link</div>
+            <div class="stat-value" id="stat-link">0 / 0</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Tabs Opened</div>
+            <div class="stat-value" id="stat-opened">0</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Total Queued</div>
+            <div class="stat-value" id="stat-total">0</div>
+          </div>
+        </div>
 
+        <div class="progress-section">
+          <div class="progress-header">
+            <span>Overall Progress</span>
+            <span id="progress-label">0%</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progress-fill"></div>
+          </div>
+        </div>
 
-  const linkk = {
-        link1: `https://www.google.com/search?q=ai+interview+company+in+india+&sxsrf=ANbL-n7ANSiNSuCV-LPGLcumSavVAuuxpQ%3A1776827709667`,
-        link2: `https://www.interviewgod.ai/`,
-        link3: `https://www.google.com/search?q=AI+Call+Screening+in+usa&sxsrf=ANbL-n7oxDO7y5P4oKWYy1CbMpl5k6c3nw%3A1776827788257`,
-        link4: `https://www.interviewgod.ai/feature/ai-call-screening`,//.
-        link5: `https://www.google.com/search?q=AI+Assessments+dubai&sxsrf=ANbL-n4GU8MzbRnXiQjlvmAE-tdzH_aqUQ%3A1776827842492`,
-        link6: `https://www.interviewgod.ai/feature/ai-assessment`,//
-        link7: `https://www.google.com/search?q=AI+driven+skill+evaluation+in+india&sxsrf=ANbL-n4XlcNAXBXGkSTXag6MEJ1m8UjpYA%3A1776827934965`,
-        link8:`https://interviewgod.ai/services/ai-interviewing`,
+        <div class="timer-section">
+          <div class="timer-info">
+            <span class="timer-label">
+              <svg viewBox="0 0 24 24"><path d="M15.07 1.54L13.65.12 12 1.77l1.42 1.42 1.65-1.65zM11 7v6l4.25 2.52.77-1.3-3.52-2.09V7H11zm1 15a9 9 0 0 1-9-9A9 9 0 0 1 12 4a9 9 0 0 1 9 9 9 9 0 0 1-9 9zm0-20C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+              Next Tab In
+            </span>
+            <span class="timer-value" id="timer-value">—</span>
+          </div>
+          <div class="timer-bar-container">
+            <div class="timer-bar-fill" id="timer-fill"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        link9: `https://www.google.com/search?q=AI+based+candidate+screening+in+dubai&sxsrf=ANbL-n4SN4hUkyPYeAqVfTJEy7vhDE4ULw%3A1776827991877`,
-        link10: `https://www.interviewgod.ai/feature/resume-screening`,//
+  </div>
 
-        link11: `https://www.google.com/search?q=AI+hiring+service+for+Manufacturing+Industry+in+usa&ie=UTF-8`,
-        link12 : `https://www.interviewgod.ai/industries/manufacturing`,
-       
-    }
-    let j = 0;
-   var newintervel;
-    b  = Object.values(linkk);
-    var but1 =  document.getElementById("but1");
-    but1.addEventListener("click",()=>{
-        newintervel = setInterval(()=>{
-     if(i<b.length){
-        window.open(b[j], "_blank");
-        j++;
-        }
-        else{
-           clearInterval(newintervel);
-        }
+  <!-- ───── LINK MANAGEMENT ───── -->
+  <div class="glass-card">
+    <div class="panel-title">
+      <svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1 0 1.71-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
+      Link Management
+    </div>
+    <div class="tabs-container">
+      <div class="presets-row">
+        <div class="presets-select-wrapper">
+          <label for="preset-select">Preset</label>
+          <select id="preset-select">
+            <option value="preset1">Banao Technologies</option>
+            <option value="preset2">Banao Tech Generative AI SEO</option>
+            <option value="preset3">Interview God AI SEO</option>
+            <option value="custom">Custom Links</option>
+          </select>
+        </div>
+        <div>
+          <label>&nbsp;</label>
+          <span class="preset-info-tag" id="link-count-tag">12 links</span>
+        </div>
+      </div>
 
-        },4000)
-   
-    })
+      <div class="link-textarea-container">
+        <div class="textarea-header">
+          <label for="link-textarea">Links (one per line)</label>
+          <button id="btn-save-custom" class="btn btn-secondary" style="font-size:0.78rem;padding:0.35rem 0.75rem;">
+            <svg viewBox="0 0 24 24" style="width:0.9rem;height:0.9rem;fill:currentColor"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+            Save Custom
+          </button>
+        </div>
+        <textarea id="link-textarea" placeholder="Paste one URL per line here, e.g.&#10;https://example.com&#10;https://google.com/search?q=test&#10;..."></textarea>
+        <div class="textarea-footer">
+          <span>Only lines starting with <code>http</code> are counted as valid links.</span>
+          <span id="link-count-footer"></span>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- ───── EVENT LOG / CONSOLE ───── -->
+  <div class="glass-card console-card">
+    <div class="panel-title">
+      <svg viewBox="0 0 24 24"><path d="M20 3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H4V5h16v14zM6 15h2l-2 2h2v1H6v-1l2-2H6v-1zm4-4h4v1h-4v-1zm0 3h6v1h-6v-1zm0-6h6v1h-6V8z"/></svg>
+      Activity Log
+      <button id="btn-clear-log" class="btn btn-secondary console-header-actions" style="font-size:0.75rem;padding:0.3rem 0.75rem;margin-left:auto;">
+        Clear
+      </button>
+    </div>
+    <div class="console-body" id="console-body"></div>
+  </div>
 
+</div>
 
-</script> -->
-
-
+<script src="app.js"></script>
 </body>
 </html>
