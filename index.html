@@ -11,44 +11,54 @@
     <!-- <button id = "but1">click me for interview god seo </button> -->
 
 <script>
-const link  =  {
+const originalLinks = {
     link1: 'https://www.google.com/search?q=banao+technologies',
-    link2:'https://banao.tech/',
-    link3 :'https://www.google.com/search?q=interview+god',
-    link4 :'https://www.interviewgod.ai/',
-     link5: 'https://www.google.com/search?q=banao+technologies',
-    link6:'https://banao.tech/',
-    link7:'https://www.google.com/search?q=vidya&sourceid=chrome',
-    link8:'https://vidya.online/',
-    link9:'https://www.google.com/search?q=vikaas',
-    link10:'AEBmAIJoAKPCcICChAAGEcY1gQYsAPCAg4QABjkAhjWBBiwA9gBAcICFxAuGNwGGLgGGNoGGNgCGMgDGLAD2AEBwgILEAAYgAQYigUYkQLCAgsQLhivARjHARiABMICBxAAGIAEGArCAgsQLhiABBjHARivAcICBxAAGIAEGA3CAg0QLhiABBgNGMcBGK8BwgIJEAAYgAQYDRgKwgIGEAAYHhgNwgIKEC4YAhjLARiABMICEBAuGBQYrwEYxwEYhwIYgATCAgoQLhiABBgCGMsBwgIZEC4YAhjLARiABBiXBRjcBBjeBBjfBNgBAZgDAIgGAZAGDboGBggBEAEYCZIHBTQuMi4zoAfpRLIHBTAuMi4zuAfRCMIHBzMtNy4xLjHIB6EBgAgB',
-    link11:'https://vikaas.ai/',
-    link12: 'https://www.google.com/search?q=Axon',
-    link13:'https://axonhq.ai/',
-}
-let valuea  = Object.values(link)
-let i =0;
-var but = document.getElementById("but");
-let interval;
-but.addEventListener("click",()=>{
+    link2: 'https://banao.tech/',
+    link3: 'https://www.google.com/search?q=interview+god',
+    link4: 'https://www.interviewgod.ai/',
+    link5: 'https://www.google.com/search?q=banao+technologies',
+    link6: 'https://banao.tech/',
+    link7: 'https://www.google.com/search?q=vidya&sourceid=chrome',
+    link8: 'https://vidya.online/',
+    link9: 'https://www.google.com/search?q=vikaas',
+    link10: 'AEBmAIJoAKPCcICChAAGEcY1gQYsAPCAg4QABjkAhjWBBiwA9gBAcICFxAuGNwGGLgGGNoGGNgCGMgDGLAD2AEBwgILEAAYgAQYigUYkQLCAgsQLhivARjHARiABMICBxAAGIAEGArCAgsQLhiABBjHARivAcICBxAAGIAEGA3CAg0QLhiABBgNGMcBGK8BwgIJEAAYgAQYDRgKwgIGEAAYHhgNwgIKEC4YAhjLARiABMICEBAuGBQYrwEYxwEYhwIYgATCAgoQLhiABBgCGMsBwgIZEC4YAhjLARiABBiXBRjcBBjeBBjfBNgBAZgDAIgGAZAGDboGBggBEAEYCZIHBTQuMi4zoAfpRLIHBTAuMi4zuAfRCMIHBzMtNy4xLjHIB6EBgAgB',
+    link11: 'https://vikaas.ai/',
+    link12: 'https://www.google.com/search?q=axonhq.+ai',
+    link13: 'https://axonhq.ai/',
+};
 
-interval = setInterval(() => {
-     if(i<valuea.length){
-            window.open(valuea[i], "_blank");
-            i++;    
+function repeatLinkObject(source, times) {
+    const repeated = {};
+    let index = 1;
+    Object.values(source).forEach(value => {
+        for (let count = 0; count < times; count += 1) {
+            repeated[`link${index}`] = value;
+            index += 1;
         }
-        else{
+    });
+    return repeated;
+}
+
+const link = repeatLinkObject(originalLinks, 4);
+const valuea = Object.values(link);
+let i = 0;
+const but = document.getElementById("but");
+let interval;
+
+but.addEventListener("click", () => {
+    if (interval) {
+        clearInterval(interval);
+    }
+    i = 0;
+    interval = setInterval(() => {
+        if (i < valuea.length) {
+            window.open(valuea[i], "_blank");
+            i += 1;
+        } else {
             clearInterval(interval);
         }
-}, 12000);
-   
-    
-})
-
-   
-
-
-
+    }, 3000);
+});
 </script>
 <!-- <script>
     const link = {
