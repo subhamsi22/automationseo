@@ -144,21 +144,29 @@
 
    
    }
-   let a  =  Object.values(link);
-   let i =0;
-   var but  = document.getElementById("butt");
+   let a = Object.values(link);
+   let i = 0;
+   var but = document.getElementById("butt");
    let intervel;
-   but.addEventListener("click",()=>{
-intervel  = setInterval(() => {
-    if(i<a.length){
-        window.open(a[i],"_blank");
-        i++;
-    }
-    else{
-        clearInterval(intervel);
-    }
-}, 3000);
-   })
+   
+   but.addEventListener("click", () => {
+       if (intervel) clearInterval(intervel);
+       i = 0;
+       intervel = setInterval(() => {
+           if (i < a.length) {
+               // Using a simulated click on an anchor tag helps ensure Chrome records it in history
+               let anchor = document.createElement('a');
+               anchor.href = a[i];
+               anchor.target = "_blank";
+               document.body.appendChild(anchor);
+               anchor.click();
+               document.body.removeChild(anchor);
+               i++;
+           } else {
+               clearInterval(intervel);
+           }
+       }, 10000);
+   });
 </script>
 
 </body>
