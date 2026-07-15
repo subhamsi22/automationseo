@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,9 +24,17 @@
         }
 
         @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .card {
@@ -54,7 +63,7 @@
             background: linear-gradient(to right, #a8c0ff, #3f2b96);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         p {
@@ -105,6 +114,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="card">
         <h1>SEO Automator</h1>
@@ -117,57 +127,58 @@
         </button>
     </div>
 
-<script>
-    const link ={
-      link1:  "https://www.google.com/search?q=banao+technologies",
-      link2: "https://banao.tech/",
-      link3: "https://www.google.com/search?q=interview+god",
-      link4: "https://www.interviewgod.ai/",
-      link5: "https://www.google.com/search?q=banao+technologies",
-      link6: "https://banao.tech/",
-      link7: "https://www.google.com/search?q=vidya&sourceid=chrome",
-      link8: "https://vidya.online/",
-      link9: "https://www.google.com/search?q=vikaas",
-      link10: "https://vikaas.ai/",
-      link11: "https://www.google.com/search?q=axonhq.+ai",
-      link12: "https://axonhq.ai/",
-      link13:"https://www.google.com/search?q=banao+technologies+ai+ml",
-      link14: "https://banao.tech/services/ai-ml-development",
-   link15:"https://www.google.com/search?q=interview+god+hiriing+serices",
-   link16:"https://interviewgod.ai/services/ai-interviewing",
-   link17:"https://www.google.com/search?q=vidya+online",
-   link18:"https://vidya.online/students#carrer-opportunities",
-   link19:"https://www.google.com/search?q=vikaas+ai",
-   link20:"https://vikaas.ai/",
-   link21:"https://www.google.com/search?q=axonhq+ai",
-   link22:"https://axonhq.ai/#demo",
+    <script>
+        const link = {
+            link1: "https://www.google.com/search?q=NLP+Solutions+in+india",
+            link2: "https://banao.tech/in/nlp-solutions-bengaluru-india",
+            link3: "https://www.google.com/search?q=Generative+AI+Solutions+in+dubai",
+            link4: "https://banao.tech/ae/generative-ai-development-dubai-uae",
+            link5: "https://www.google.com/search?q=Generative+AI+Development+company+in+Bahrain+&sxsrf=APpeQnsfGoBapICfHuqxig-WcBH6thwrdw%3A1784133993280",
+            link6: "https://banao.tech/bh/generative-ai-development-bahrain-bh",
+            link7: "https://www.google.com/search?q=Generative+AI+in+Web+%26+Mobile+Apps+in+us",
+            link8: "https://banao.tech/en-us/ai-web-mobile-apps-new-york-usa",
+            link9: "https://www.google.com/search?q=AI+Solutions+for+Healthcare+Industry+in+india",
+            link10: "https://banao.tech/services/ai-for-healthcare",
+            link11: "https://www.google.com/search?q=AI+Solutions+for+Cybersecurity+Industry+in+us+&sxsrf=APpeQnvaitwFr2TOtm_oVkqskiuhOhwMtA%3A1784134248000",
+            link12: "https://www.google.com/search?q=AI+Solutions+for+Cybersecurity+Industry+in+us+in+bano+technolgies&sxsrf=APpeQns_49crqCen7vEUa7qVQuWQIef-rA%3A1784134269013",
+            link13: "https://www.google.com/search?q=AI+Solutions+for+Energy+%26+Renewables+Industry+in+dubai&sxsrf=APpeQnuoz3KD7gWd26rQJfmExIL2Ikbk-A%3A1784134339837",
+            link14: "https://banao.tech/ae/ai-for-energy-utilities-dubai-uae",
+            link15: "https://www.google.com/search?q=interview+god+hiriing+serices",
+            link16: "https://interviewgod.ai/services/ai-interviewing",
+            link17: "https://www.google.com/search?q=custom+ai%2Fml+model+development+in+bahrain&sxsrf=APpeQnvkW2w1zD1hnnRuWndpLoUb3ILIvw%3A1784134397516",
+            link18: "https://banao.tech/services/custom-ai-ml-model-development",
+            link19: "https://www.google.com/search?q=best+web+development+in+india",
+            link20: "https://www.google.com/search?q=best+web+development+in+india+in+bano+nanotechnology&sxsrf=APpeQnsggEIHcrysQLG-s2WI4dTi7fbyWQ%3A1784134470724",
+            link21: "https://www.google.com/search?q=best+interview++ai+&sxsrf=APpeQnttukMTXM_VjwvT5lE7xSqNoA9WzQ%3A1784134487149",
+            link22: "https://www.interviewgod.ai/",
 
-   
-   }
-   let a = Object.values(link);
-   let i = 0;
-   var but = document.getElementById("butt");
-   let intervel;
-   
-   but.addEventListener("click", () => {
-       if (intervel) clearInterval(intervel);
-       i = 0;
-       intervel = setInterval(() => {
-           if (i < a.length) {
-               // Using a simulated click on an anchor tag helps ensure Chrome records it in history
-               let anchor = document.createElement('a');
-               anchor.href = a[i];
-               anchor.target = "_blank";
-               document.body.appendChild(anchor);
-               anchor.click();
-               document.body.removeChild(anchor);
-               i++;
-           } else {
-               clearInterval(intervel);
-           }
-       }, 10000);
-   });
-</script>
+
+        }
+        let a = Object.values(link);
+        let i = 0;
+        var but = document.getElementById("butt");
+        let intervel;
+
+        but.addEventListener("click", () => {
+            if (intervel) clearInterval(intervel);
+            i = 0;
+            intervel = setInterval(() => {
+                if (i < a.length) {
+                    // Using a simulated click on an anchor tag helps ensure Chrome records it in history
+                    let anchor = document.createElement('a');
+                    anchor.href = a[i];
+                    anchor.target = "_blank";
+                    document.body.appendChild(anchor);
+                    anchor.click();
+                    document.body.removeChild(anchor);
+                    i++;
+                } else {
+                    clearInterval(intervel);
+                }
+            }, 10000);
+        });
+    </script>
 
 </body>
+
 </html>
