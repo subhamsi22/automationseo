@@ -127,58 +127,98 @@
         </button>
     </div>
 
-    <script>
-        const link = {
-            link1: "https://www.google.com/search?q=NLP+Solutions+in+india",
-            link2: "https://banao.tech/in/nlp-solutions-bengaluru-india",
-            link3: "https://www.google.com/search?q=Generative+AI+Solutions+in+dubai",
-            link4: "https://banao.tech/ae/generative-ai-development-dubai-uae",
-            link5: "https://www.google.com/search?q=Generative+AI+Development+company+in+Bahrain+&sxsrf=APpeQnsfGoBapICfHuqxig-WcBH6thwrdw%3A1784133993280",
-            link6: "https://banao.tech/bh/generative-ai-development-bahrain-bh",
-            link7: "https://www.google.com/search?q=Generative+AI+in+Web+%26+Mobile+Apps+in+us",
-            link8: "https://banao.tech/en-us/ai-web-mobile-apps-new-york-usa",
-            link9: "https://www.google.com/search?q=AI+Solutions+for+Healthcare+Industry+in+india",
-            link10: "https://banao.tech/services/ai-for-healthcare",
-            link11: "https://www.google.com/search?q=AI+Solutions+for+Cybersecurity+Industry+in+us+&sxsrf=APpeQnvaitwFr2TOtm_oVkqskiuhOhwMtA%3A1784134248000",
-            link12: "https://www.google.com/search?q=AI+Solutions+for+Cybersecurity+Industry+in+us+in+bano+technolgies&sxsrf=APpeQns_49crqCen7vEUa7qVQuWQIef-rA%3A1784134269013",
-            link13: "https://www.google.com/search?q=AI+Solutions+for+Energy+%26+Renewables+Industry+in+dubai&sxsrf=APpeQnuoz3KD7gWd26rQJfmExIL2Ikbk-A%3A1784134339837",
-            link14: "https://banao.tech/ae/ai-for-energy-utilities-dubai-uae",
-            link15: "https://www.google.com/search?q=interview+god+hiriing+serices",
-            link16: "https://interviewgod.ai/services/ai-interviewing",
-            link17: "https://www.google.com/search?q=custom+ai%2Fml+model+development+in+bahrain&sxsrf=APpeQnvkW2w1zD1hnnRuWndpLoUb3ILIvw%3A1784134397516",
-            link18: "https://banao.tech/services/custom-ai-ml-model-development",
-            link19: "https://www.google.com/search?q=best+web+development+in+india",
-            link20: "https://www.google.com/search?q=best+web+development+in+india+in+bano+nanotechnology&sxsrf=APpeQnsggEIHcrysQLG-s2WI4dTi7fbyWQ%3A1784134470724",
-            link21: "https://www.google.com/search?q=best+interview++ai+&sxsrf=APpeQnttukMTXM_VjwvT5lE7xSqNoA9WzQ%3A1784134487149",
-            link22: "https://www.interviewgod.ai/",
+   <script>
+    const links = [
+        "https://www.google.com/search?q=NLP+Solutions+in+india",
+        "https://banao.tech/in/nlp-solutions-bengaluru-india",
 
+        "https://www.google.com/search?q=Generative+AI+Solutions+in+dubai",
+        "https://banao.tech/ae/generative-ai-development-dubai-uae",
 
+        "https://www.google.com/search?q=Generative+AI+Development+company+in+Bahrain",
+        "https://banao.tech/bh/generative-ai-development-bahrain-bh",
+
+        "https://www.google.com/search?q=Generative+AI+in+Web+%26+Mobile+Apps+in+us",
+        "https://banao.tech/en-us/ai-web-mobile-apps-new-york-usa",
+
+        "https://www.google.com/search?q=AI+Solutions+for+Healthcare+Industry+in+india",
+        "https://banao.tech/services/ai-for-healthcare",
+
+        "https://www.google.com/search?q=AI+Solutions+for+Cybersecurity+Industry+in+us",
+        "https://www.google.com/search?q=AI+Solutions+for+Cybersecurity+Industry+in+us+in+bano+technolgies",
+
+        "https://www.google.com/search?q=AI+Solutions+for+Energy+%26+Renewables+Industry+in+dubai",
+        "https://banao.tech/ae/ai-for-energy-utilities-dubai-uae",
+
+        "https://www.google.com/search?q=interview+god+hiring+services",
+        "https://interviewgod.ai/services/ai-interviewing",
+
+        "https://www.google.com/search?q=custom+ai%2Fml+model+development+in+bahrain",
+        "https://banao.tech/services/custom-ai-ml-model-development",
+
+        "https://www.google.com/search?q=best+web+development+in+india",
+        "https://www.google.com/search?q=best+web+development+in+india+in+bano+nanotechnology",
+
+        "https://www.google.com/search?q=best+interview+ai",
+        "https://www.interviewgod.ai/"
+    ];
+
+    const button = document.getElementById("butt");
+
+    button.addEventListener("click", function () {
+
+        /*
+         * Open the first page immediately.
+         * This is directly triggered by the user's tap,
+         * so mobile browsers are much more likely to allow it.
+         */
+        const firstWindow = window.open(links[0], "_blank");
+
+        /*
+         * If popup was blocked, open in the same tab.
+         */
+        if (!firstWindow) {
+            window.location.href = links[0];
+            return;
         }
-        let a = Object.values(link);
-        let i = 0;
-        var but = document.getElementById("butt");
-        let intervel;
 
-        but.addEventListener("click", () => {
-            if (intervel) clearInterval(intervel);
-            i = 0;
-            intervel = setInterval(() => {
-                if (i < a.length) {
-                    // Using a simulated click on an anchor tag helps ensure Chrome records it in history
-                    let anchor = document.createElement('a');
-                    anchor.href = a[i];
-                    anchor.target = "_blank";
-                    document.body.appendChild(anchor);
-                    anchor.click();
-                    document.body.removeChild(anchor);
-                    i++;
-                } else {
-                    clearInterval(intervel);
-                }
-            }, 10000);
-        });
-    </script>
+        /*
+         * Open remaining links with a small delay.
+         * Mobile browsers may still block some of these.
+         */
+        let index = 1;
 
+        const interval = setInterval(() => {
+
+            if (index >= links.length) {
+                clearInterval(interval);
+                button.innerHTML = "✓ SEO Links Opened";
+                return;
+            }
+
+            const newWindow = window.open(links[index], "_blank");
+
+            /*
+             * If browser blocks popup, stop trying.
+             */
+            if (!newWindow) {
+                clearInterval(interval);
+
+                button.innerHTML = "⚠ Popups Blocked";
+
+                alert(
+                    "Your mobile browser blocked multiple tabs. " +
+                    "Please allow pop-ups for this website."
+                );
+
+                return;
+            }
+
+            index++;
+
+        }, 1000);
+    });
+</script>
 </body>
 
 </html>
