@@ -9,6 +9,17 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
 
+        .link-list a.done {
+            opacity: 0.4;
+            text-decoration: line-through;
+        }
+
+        #butt:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -112,6 +123,26 @@
             stroke-linecap: round;
             stroke-linejoin: round;
         }
+
+        .link-list {
+            display: none;
+            max-height: 40vh;
+            margin-top: 1.5rem;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        .link-list a {
+            display: block;
+            padding: 0.7rem 0;
+            color: #ffffff;
+            overflow-wrap: anywhere;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .link-list.visible {
+            display: block;
+        }
     </style>
 </head>
 
@@ -119,106 +150,139 @@
     <div class="card">
         <h1>SEO Automator</h1>
         <p>Boost your workflow. Click below to automatically launch all your essential tracking links.</p>
+        <div id="link-list" class="link-list" aria-live="polite"></div>
+        <p id="status" style="margin:1rem 0 0;font-size:1rem"></p>
+
         <button id="butt">
             <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
             </svg>
             Click Me for SEO
+
         </button>
+        <div id="link-list" class="link-list" aria-live="polite"></div>
     </div>
 
-   <script>
-    const links = [
-        "https://www.google.com/search?q=NLP+Solutions+in+india",
-        "https://banao.tech/in/nlp-solutions-bengaluru-india",
+    <script>
+        const link = {
+            link1: "https://www.google.com/search?q=NLP+Solutions+in+india",
+            link2: "https://banao.tech/in/nlp-solutions-bengaluru-india",
+            link3: "https://www.google.com/search?q=Generative+AI+Solutions+in+dubai",
+            link4: "https://banao.tech/ae/generative-ai-development-dubai-uae",
+            link5: "https://www.google.com/search?q=Generative+AI+Development+company+in+Bahrain+&sxsrf=APpeQnsfGoBapICfHuqxig-WcBH6thwrdw%3A1784133993280",
+            link6: "https://banao.tech/bh/generative-ai-development-bahrain-bh",
+            link7: "https://www.google.com/search?q=Generative+AI+in+Web+%26+Mobile+Apps+in+us",
+            link8: "https://banao.tech/en-us/ai-web-mobile-apps-new-york-usa",
+            link9: "https://www.google.com/search?q=AI+Solutions+for+Healthcare+Industry+in+india",
+            link10: "https://banao.tech/services/ai-for-healthcare",
+            link11: "https://www.google.com/search?q=AI+Solutions+for+Cybersecurity+Industry+in+us+&sxsrf=APpeQnvaitwFr2TOtm_oVkqskiuhOhwMtA%3A1784134248000",
+            link12: "https://www.google.com/search?q=AI+Solutions+for+Cybersecurity+Industry+in+us+in+bano+technolgies&sxsrf=APpeQns_49crqCen7vEUa7qVQuWQIef-rA%3A1784134269013",
+            link13: "https://www.google.com/search?q=AI+Solutions+for+Energy+%26+Renewables+Industry+in+dubai&sxsrf=APpeQnuoz3KD7gWd26rQJfmExIL2Ikbk-A%3A1784134339837",
+            link14: "https://banao.tech/ae/ai-for-energy-utilities-dubai-uae",
+            link15: "https://www.google.com/search?q=interview+god+hiriing+serices",
+            link16: "https://interviewgod.ai/services/ai-interviewing",
+            link17: "https://www.google.com/search?q=custom+ai%2Fml+model+development+in+bahrain&sxsrf=APpeQnvkW2w1zD1hnnRuWndpLoUb3ILIvw%3A1784134397516",
+            link18: "https://banao.tech/services/custom-ai-ml-model-development",
+            link19: "https://www.google.com/search?q=best+web+development+in+india",
+            link20: "https://www.google.com/search?q=best+web+development+in+india+in+bano+nanotechnology&sxsrf=APpeQnsggEIHcrysQLG-s2WI4dTi7fbyWQ%3A1784134470724",
+            link21: "https://www.google.com/search?q=best+interview++ai+&sxsrf=APpeQnttukMTXM_VjwvT5lE7xSqNoA9WzQ%3A1784134487149",
+            link22: "https://www.interviewgod.ai/",
 
-        "https://www.google.com/search?q=Generative+AI+Solutions+in+dubai",
-        "https://banao.tech/ae/generative-ai-development-dubai-uae",
 
-        "https://www.google.com/search?q=Generative+AI+Development+company+in+Bahrain",
-        "https://banao.tech/bh/generative-ai-development-bahrain-bh",
+        }
+        const urls = Object.values(link);
+        const DELAY = 5000;          // 5 seconds
+        let index = 0;               // next link to open
+        let lastOpen = 0;            // time of last open
+        let autoTimer = null;
+        let manualMode = false;
 
-        "https://www.google.com/search?q=Generative+AI+in+Web+%26+Mobile+Apps+in+us",
-        "https://banao.tech/en-us/ai-web-mobile-apps-new-york-usa",
+        const but = document.getElementById("butt");
+        const linkList = document.getElementById("link-list");
+        const statusEl = document.getElementById("status");
 
-        "https://www.google.com/search?q=AI+Solutions+for+Healthcare+Industry+in+india",
-        "https://banao.tech/services/ai-for-healthcare",
-
-        "https://www.google.com/search?q=AI+Solutions+for+Cybersecurity+Industry+in+us",
-        "https://www.google.com/search?q=AI+Solutions+for+Cybersecurity+Industry+in+us+in+bano+technolgies",
-
-        "https://www.google.com/search?q=AI+Solutions+for+Energy+%26+Renewables+Industry+in+dubai",
-        "https://banao.tech/ae/ai-for-energy-utilities-dubai-uae",
-
-        "https://www.google.com/search?q=interview+god+hiring+services",
-        "https://interviewgod.ai/services/ai-interviewing",
-
-        "https://www.google.com/search?q=custom+ai%2Fml+model+development+in+bahrain",
-        "https://banao.tech/services/custom-ai-ml-model-development",
-
-        "https://www.google.com/search?q=best+web+development+in+india",
-        "https://www.google.com/search?q=best+web+development+in+india+in+bano+nanotechnology",
-
-        "https://www.google.com/search?q=best+interview+ai",
-        "https://www.interviewgod.ai/"
-    ];
-
-    const button = document.getElementById("butt");
-
-    button.addEventListener("click", function () {
-
-        /*
-         * Open the first page immediately.
-         * This is directly triggered by the user's tap,
-         * so mobile browsers are much more likely to allow it.
-         */
-        const firstWindow = window.open(links[0], "_blank");
-
-        /*
-         * If popup was blocked, open in the same tab.
-         */
-        if (!firstWindow) {
-            window.location.href = links[0];
-            return;
+        function renderList() {
+            linkList.innerHTML = "";
+            urls.forEach((url, i) => {
+                const a = document.createElement("a");
+                a.href = url;
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+                a.id = "lnk-" + i;
+                const p = new URL(url);
+                a.textContent = `${i + 1}. ${p.hostname}${p.pathname}`;
+                linkList.appendChild(a);
+            });
+            linkList.classList.add("visible");
         }
 
-        /*
-         * Open remaining links with a small delay.
-         * Mobile browsers may still block some of these.
-         */
-        let index = 1;
-
-        const interval = setInterval(() => {
-
-            if (index >= links.length) {
-                clearInterval(interval);
-                button.innerHTML = "✓ SEO Links Opened";
-                return;
-            }
-
-            const newWindow = window.open(links[index], "_blank");
-
-            /*
-             * If browser blocks popup, stop trying.
-             */
-            if (!newWindow) {
-                clearInterval(interval);
-
-                button.innerHTML = "⚠ Popups Blocked";
-
-                alert(
-                    "Your mobile browser blocked multiple tabs. " +
-                    "Please allow pop-ups for this website."
-                );
-
-                return;
-            }
-
+        // returns true if the tab opened, false if blocked
+        function openCurrent() {
+            const w = window.open(urls[index], "_blank");
+            if (!w) return false;           // popup blocked
+            w.opener = null;
+            document.getElementById("lnk-" + index).classList.add("done");
             index++;
+            lastOpen = Date.now();
+            return true;
+        }
 
-        }, 1000);
-    });
-</script>
+        function autoNext() {
+            if (index >= urls.length) {
+                statusEl.textContent = "All links opened ✅";
+                return;
+            }
+            if (openCurrent()) {
+                statusEl.textContent = `Opened ${index}/${urls.length}. Next in 5 seconds...`;
+                autoTimer = setTimeout(autoNext, DELAY);
+            } else {
+                startManualMode();            // browser blocked the timer popup
+            }
+        }
+
+        function startManualMode() {
+            manualMode = true;
+            clearTimeout(autoTimer);
+            statusEl.textContent = "Your browser blocks auto-opening. Tap the button for each link.";
+            updateManualButton();
+            setInterval(updateManualButton, 250);
+        }
+
+        function updateManualButton() {
+            if (index >= urls.length) {
+                but.disabled = true;
+                but.textContent = "All done ✅";
+                return;
+            }
+            const left = Math.ceil((DELAY - (Date.now() - lastOpen)) / 1000);
+            if (left > 0) {
+                but.disabled = true;
+                but.textContent = `Wait ${left}s...`;
+            } else {
+                but.disabled = false;
+                but.textContent = `Open link ${index + 1} of ${urls.length}`;
+            }
+        }
+
+        but.addEventListener("click", () => {
+            if (index === 0) renderList();
+
+            if (manualMode) {
+                if (Date.now() - lastOpen >= DELAY) {
+                    openCurrent();
+                    updateManualButton();
+                }
+                return;
+            }
+
+            // First click: open link 1 directly from the tap, then try auto mode
+            if (!openCurrent()) { startManualMode(); return; }
+            but.disabled = true;
+            statusEl.textContent = `Opened 1/${urls.length}. Next in 5 seconds...`;
+            autoTimer = setTimeout(autoNext, DELAY);
+        });
+    </script>
+
 </body>
 
 </html>
